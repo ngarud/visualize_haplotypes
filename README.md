@@ -6,7 +6,7 @@
 mkdir ~/H12_visualization
 
 # create a dir for scripts
-https://github.com/ngarud/visualize_haplotypes.git
+git clone https://github.com/ngarud/visualize_haplotypes.git
 # rename this dir:
 mv ~/H12_visualization/visualize_haplotypes ~/H12_visualization/scripts
 
