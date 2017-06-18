@@ -11,6 +11,8 @@ import csv
 import linecache
 import random
 import time
+import numpy
+import Bio
 
 ######################
 
