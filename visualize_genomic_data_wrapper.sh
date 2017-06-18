@@ -33,6 +33,6 @@ bash ~/westway-home/rats/documentation_rats/SelectionHapStats/scripts/visualizeG
     $coord \
     $win_viz \
     $num_samples \
-    ${dir}/figures/genomic_visualization_chr${chr}_coord${coord}_winH12${win_viz}_winViz${win_viz}.pdf
+    ${dir}/figures/genomic_visualization_chr${chr}_coord${coord}_winH12_${win_H12}_winViz_${win_viz}.pdf
 
 echo 'Done visualizing!'

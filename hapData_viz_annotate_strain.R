@@ -8,16 +8,19 @@
 #! /path/to/Rscript --vanilla --default-packages=utils
 args = commandArgs(TRUE)
 analysisWindow = read.table(args[1])
-#analysisWindow=read.table('230320208_H12_H2H1_tmp.txt')
+#analysisWindow=read.table('~/H12_visualization/tmp_intermediate/2901144_H12_H2H1_tmp.txt')
 genomicData = read.table(args[2],sep=",",colClasses = "character")
-#genomicData = read.table('230320208_data_tmp.txt',sep=",",colClasses = "character")
+#genomicData = read.table('~/H12_visualization/tmp_intermediate/2901144_data_tmp.txt',sep=",",colClasses = "character")
 outFile = args[3]
-#outFile='~/rats/H12_scan/genomicVisualization/genomicVisualization_chr1_coord230320208_w201.pdf'
+#outFile='~/H12_visualization/figures/genomicVisualization_chr1_coord2901144_w201.pdf'
 windowSize = as.numeric(args[4])
 #windowSize=201
 sampleSize = as.numeric(args[5])
 #sampleSize=29
 
+# read in the names of the individuals
+rat_ids=read.table('~/H12_visualization/scripts/nyc_individuals_order_in_vcf.txt')
+rat_ids=sapply(rat_ids, as.character) 
 # give each individual's haplotype data an ID ranging from 1 to the sampleSize
 names(genomicData)<-c("SNPloc",paste("Strain", 1:sampleSize, sep=""))
 
@@ -130,9 +133,9 @@ cols=col=c(8,9,rainbow(6),"blue","darkorange","purple","pink","darkgreen",5,6)
 #make a figure
 	cexpos=1
 #open a pdf file to make a figure
-	widthpng=700; 
+	widthpng=800; 
 	heightpng=1000; 	
-	pdf(outFile,width=5,height=7)
+	pdf(outFile,width=8.5,height=7)
 	par(mar=c(1,1,3,1))
 #make empty plot
 	plot(1:2,1:2,col="white",ylim=c(-10.3,sampleSize),xlim=c(-3,windowSize),ylab="",xlab="",yaxt="n",xaxt="n",frame.plot=FALSE)
@@ -145,7 +148,7 @@ cols=col=c(8,9,rainbow(6),"blue","darkorange","purple","pink","darkgreen",5,6)
 		for (j in 1:windowSize){
 			rect(j-1,height[1],j,height[2],density=-1,col=as.numeric(ZeroOneHaplotypes[i,j]),lwd=0., border=NA)	
 		}
-                text(-5,(height[1]+height[2])/2,StrainClusterOrder[i], cex=0.5)
+                text(-7,(height[1]+height[2])/2, rat_ids[i], cex=0.5)
 		h=h+1} 
 		
 #indicate where clusters are 	

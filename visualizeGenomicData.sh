@@ -14,13 +14,17 @@ lineNo=`cat $dataFile | cut -f1 -d',' | grep -w $coord -n | cut -f1 -d':'`
 halfWindow=`echo $(( window/2 ))`
 upperLineNo=`echo $((lineNo+ halfWindow))`
 doubleHalf=`echo $(( halfWindow*2 +1))`
-cat $dataFile | head -$upperLineNo | tail -$doubleHalf > ${coord}_data_tmp.txt
+
+# make a dir for tmp intermediate files
+mkdir ~/H12_visualization/tmp_intermediate
+
+cat $dataFile | head -$upperLineNo | tail -$doubleHalf > ~/H12_visualization/tmp_intermediate/${coord}_data_tmp.txt
 
 lineNo2=`cat $analysisWindow | cut -f1 | grep -w $coord -n | cut -f1 -d':'`
-cat $analysisWindow | head -$lineNo2 | tail -1 > ${coord}_H12_H2H1_tmp.txt
+cat $analysisWindow | head -$lineNo2 | tail -1 > ~/H12_visualization/tmp_intermediate/${coord}_H12_H2H1_tmp.txt
 
 script_dir=~/H12_visualization/scripts/
-Rscript ${script_dir}/hapData_viz_annotate_strain.R ${coord}_H12_H2H1_tmp.txt ${coord}_data_tmp.txt $outFile $window $sampleSize
+Rscript ${script_dir}/hapData_viz_annotate_strain.R ~/H12_visualization/tmp_intermediate/${coord}_H12_H2H1_tmp.txt ~/H12_visualization/tmp_intermediate/${coord}_data_tmp.txt $outFile $window $sampleSize
 
-rm ${coord}_data_tmp.txt 
-rm ${coord}_H12_H2H1_tmp.txt
+rm ~/H12_visualization/tmp_intermediate/${coord}_data_tmp.txt 
+rm ~/H12_visualization/tmp_intermediate/${coord}_H12_H2H1_tmp.txt
