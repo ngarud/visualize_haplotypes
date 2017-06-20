@@ -17,6 +17,10 @@ windowSize = as.numeric(args[4])
 #windowSize=201
 sampleSize = as.numeric(args[5])
 #sampleSize=29
+chr =  args[6]
+#chr='chr1'
+win_H12 = args[7]
+
 
 # read in the names of the individuals
 rat_ids=read.table('~/H12_visualization/scripts/nyc_individuals_order_in_vcf.txt')
@@ -139,7 +143,7 @@ cols=col=c(8,9,rainbow(6),"blue","darkorange","purple","pink","darkgreen",5,6)
 	par(mar=c(1,1,3,1))
 #make empty plot
 	plot(1:2,1:2,col="white",ylim=c(-10.3,sampleSize),xlim=c(-3,windowSize),ylab="",xlab="",yaxt="n",xaxt="n",frame.plot=FALSE)
-	title(main=paste(centerSNP),cex.main = 1.8)	
+	title(main=paste('chr', chr, ' ', centerSNP,', winH12=',win_H12, ' winViz=', windowSize,sep=''),cex.main = 1.8)	
 	
 #start with most common haplotype at bottom
 	h=0

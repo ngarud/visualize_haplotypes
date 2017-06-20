@@ -27,11 +27,23 @@ def clusterSingleWindow(inFile, outFile, windowTot, distanceThreshold, numStrain
 
     center=-1
     # find the index of the center of the singleWindow
-    for lineNo in range(window, lastSNP):
+    coord_prev=-1     # this keeps track of the previous coord in case the exact coordinate is not specified by user. If exact coord is not found, the nearest SNP will be used instead. 
+    lineNo=window
+
+    while lineNo < lastSNP and center==-1:
         coord=int(linecache.getline(inFile,lineNo).split(',')[0].strip('\n'))
         if coord == singleWindow:
             center=lineNo
-    if center!=-1: # this means that the center has not be found
+        elif coord > singleWindow and coord_prev < singleWindow:
+            if coord - singleWindow > singleWindow - coord_prev:
+                center = lineNo
+            else:
+                center=lineNo-1
+        else:
+            coord_prev=coord
+            lineNo +=1
+
+    if center!=-1: # this means that the center has been found
         flies = initialize(window, center, inFile)
         runAllDefs(flies, center, distanceThreshold, inFile, outFile, window)
 

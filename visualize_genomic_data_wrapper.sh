@@ -30,9 +30,11 @@ echo 'Visualizing...'
 bash ~/westway-home/rats/documentation_rats/SelectionHapStats/scripts/visualizeGenomicData.sh \
     ${dir}/data/processedData/no_invariants/chr${chr}_no_invariants.txt \
     ${dir}/H12_output/chr${chr}_${coord}_H12_w${win_H12}.txt \
+    ${chr} \
     $coord \
     $win_viz \
     $num_samples \
+    $win_H12 \
     ${dir}/figures/genomic_visualization_chr${chr}_coord${coord}_winH12_${win_H12}_winViz_${win_viz}.pdf
 
 echo 'Done visualizing!'
