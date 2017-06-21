@@ -22,20 +22,19 @@ def clusterHaplotypes(inFile, outFile):
 
     # create a list with zeros to store the number of Ns per strain
     for line in inFile:
-        ignoreLine=False
         nucs={'A':0,'T':0,'G':0,'C':0,'.':0}
         lineList=line.strip('\n').split(',')
         position=lineList[0]
         for i in range(1, 30):
-                if lineList[i] not in nucs.keys():
-                    ignoreLine=True
-                else: nucs[lineList[i]] +=1
+            if lineList[i] in nucs.keys():
+                nucs[lineList[i]] +=1
+
         numNucs=0
         # count number of different alleles to see if the site is polymorphic:
         for n in ['A','T','G','C']:
             if nucs[n] >0:
                 numNucs +=1
-        if (numNucs >1 or nucs['.']>0) and ignoreLine==False:
+        if (numNucs >1 or nucs['.']>0):
             outFile.write(line)
 
 
