@@ -150,7 +150,7 @@ cols=col=c(8,9,rainbow(6),"blue","darkorange","purple","pink","darkgreen",5,6)
 	for (i in StrainClusterOrder){	
 		height=c(h-0.35,h+0.35)
 		for (j in 1:windowSize){
-			rect(j-1,height[1],j,height[2],density=-1,col=as.numeric(ZeroOneHaplotypes[i,j]),lwd=0., border=NA)	
+			rect(j-1,height[1],j,height[2],density=-1,col=as.numeric(ZeroOneHaplotypes[i,j]),lwd=0.5, border='white')	
 		}
                 text(-7,(height[1]+height[2])/2, rat_ids[i], cex=0.5)
 		h=h+1} 
