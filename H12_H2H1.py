@@ -86,7 +86,7 @@ def clusterHaplotypes(inFile, outFile, windowTot, jump, distanceThreshold, numSt
             # Add SNPs to the right
             for i in range(0,jump):
                 for j in range(1,numStrains+1):
-                    flies[j].append(linecache.getline(inFile,center + window +i).split(',')[j].strip())
+                    flies[j].append(linecache.getline(inFile,center + window +i -jump + 1).split(',')[j].strip())
 
         else:
             # need to fix this -- will fail because the edge cases have not been taken care of.
