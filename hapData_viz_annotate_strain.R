@@ -48,8 +48,14 @@ for (i in 1:length(haplotypes[,1])) {
 StrainOrder<-strsplit(as.character(analysisWindow[1,6]),",")[[1]]
 NumStrainsCluster<-as.numeric(strsplit(as.character(analysisWindow[1,5]),",")[[1]])
 
+
 # Count the number of singletons (NumStrainsCluster takes in a vector of the number of strains that are in haplotype clusters of 2  or greater. Need to calculate the difference between the sample size and the sum of the NumStrainsCluster). Add the singletons to NumStrainsCluster.
-NumStrainsCluster<-c(NumStrainsCluster,rep(1,length(haplotypes[,1])-sum(NumStrainsCluster)))
+# note: added this if condition to deal with UPGMA clustering
+
+if ((length(haplotypes[,1])-sum(NumStrainsCluster))>0) {
+	NumStrainsCluster<-c(NumStrainsCluster,rep(1,length(haplotypes[,1])-sum(NumStrainsCluster)))
+}
+
 
 
 # Parse StrainOrder by removing parentheses
